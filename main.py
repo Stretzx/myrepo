@@ -1,7 +1,14 @@
 import telebot
 import os
 import time
+import webview
 
+def create_webview():
+    webview.create_window("My WebView", "https://www.google.com")
+
+if __name__ == "__main__":
+    create_webview()
+    webview.start()
 # Inisialisasi bot dengan token bot Anda
 bot = telebot.TeleBot('6388514873:AAFkOzS34BRXKJAs7T2RT0tfVjwwJAvlIb0')
 
